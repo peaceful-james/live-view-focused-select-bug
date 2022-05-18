@@ -17,7 +17,12 @@ defmodule LiveViewFocusedSelectBugWeb.Router do
   scope "/", LiveViewFocusedSelectBugWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/carrots", CarrotLive.Index, :index
+    live "/", CarrotLive.Index, :new
+    live "/carrots/:id/edit", CarrotLive.Index, :edit
+
+    live "/carrots/:id", CarrotLive.Show, :show
+    live "/carrots/:id/show/edit", CarrotLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
