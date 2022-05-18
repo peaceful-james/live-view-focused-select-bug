@@ -1,0 +1,41 @@
+<h1>Listing Carrots</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.carrot_index_path(@socket, :index)}>
+    <.live_component
+      module={LiveViewFocusedSelectBugWeb.CarrotLive.FormComponent}
+      id={@carrot.id || :new}
+      title={@page_title}
+      action={@live_action}
+      carrot={@carrot}
+      return_to={Routes.carrot_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Color</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="carrots">
+    <%= for carrot <- @carrots do %>
+      <tr id={"carrot-#{carrot.id}"}>
+        <td><%= carrot.name %></td>
+        <td><%= carrot.color %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.carrot_show_path(@socket, :show, carrot) %></span>
+          <span><%= live_patch "Edit", to: Routes.carrot_index_path(@socket, :edit, carrot) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: carrot.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Carrot", to: Routes.carrot_index_path(@socket, :new) %></span>

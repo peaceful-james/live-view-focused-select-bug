@@ -1,0 +1,31 @@
+<h1>Show Carrot</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.carrot_show_path(@socket, :show, @carrot)}>
+    <.live_component
+      module={LiveViewFocusedSelectBugWeb.CarrotLive.FormComponent}
+      id={@carrot.id}
+      title={@page_title}
+      action={@live_action}
+      carrot={@carrot}
+      return_to={Routes.carrot_show_path(@socket, :show, @carrot)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @carrot.name %>
+  </li>
+
+  <li>
+    <strong>Color:</strong>
+    <%= @carrot.color %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.carrot_show_path(@socket, :edit, @carrot), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.carrot_index_path(@socket, :index) %></span>
