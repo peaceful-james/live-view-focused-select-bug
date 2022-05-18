@@ -32,3 +32,4 @@ live_view_focused_select_bug-*.tar
 npm-debug.log
 /assets/node_modules/
 
+!.tool-versions
