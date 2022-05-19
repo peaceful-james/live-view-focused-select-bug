@@ -14,7 +14,12 @@
     <%= error_tag f, :name %>
   
     <%= label f, :color %>
-    <%= select f, :color, ["red", "blue", "green"], prompt: "pick a color", class: "#{if Keyword.get(f.errors, :color), do: "alert-danger", else: "alert-info"}" %>
+    <%= select f,
+        :color,
+        ["red", "blue", "green"],
+        prompt: "pick a color",
+        id: "#{if Keyword.get(f.errors, :color), do: "select-color-error", else: "select-color-ok"}",
+        class: "#{if Keyword.get(f.errors, :color), do: "alert-danger", else: "alert-info"}" %>
     <%= error_tag f, :color %>
   
     <div>
